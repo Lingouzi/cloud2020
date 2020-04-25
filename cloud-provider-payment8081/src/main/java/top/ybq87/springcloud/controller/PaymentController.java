@@ -39,7 +39,6 @@ public class PaymentController {
     public CommonResult<Payment> create(@PathVariable("id") Long id) {
         Payment payment = paymentService.getPaymentById(id);
         log.info("查询：" + payment);
-        
         if (payment != null) {
             return CommonResult.success(payment);
         }
