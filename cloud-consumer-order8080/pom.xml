@@ -12,6 +12,13 @@
     <artifactId>cloud-consumer-order8080</artifactId>
 
     <dependencies>
+
+        <dependency>
+            <groupId>top.ybq87.springcloud</groupId>
+            <artifactId>cloud-api-commons</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -20,7 +27,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>org.projectlombok</groupId>
