@@ -1,0 +1,35 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: cloud-payment-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/db2019?useSSL=false&useUnicode=true&characterEncoding=UTF8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    druid:
+      initial-size: 5 #连接池初始化大小
+      min-idle: 10 #最小空闲连接数
+      max-active: 20 #最大连接数
+      web-stat-filter:
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*" #不统计这些请求数据
+      stat-view-servlet: #访问监控网页的登录用户名和密码
+        login-username: druid
+        login-password: druid
+
+mybatis:
+  mapper-locations:
+    - classpath:dao/*.xml
+    - classpath*:mapper/*.xml
+  type-aliases-package: top.ybq87.springcloud.entities    # 所有 entity 别名类所在包
+
+eureka:
+  client:
+    # 将当前项目注册到注册中心，默认为 true
+    register-with-eureka: true
+    # 是否从 EurekaServer 抓取已有的注册信息，默认为 true，单点无所谓，集群必须为 true
+    fetch-registry: true
+    service-url:
+      #      defaultZone: http://localhost:7001/eureka
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka

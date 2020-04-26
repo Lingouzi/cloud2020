@@ -22,7 +22,10 @@ import top.ybq87.springcloud.entities.Payment;
 @RestController
 public class OrderContrller {
     
-    public static final String PAYMENT_URL = "http://localhost:8081";
+    // 单机环境下可以写死没问题，
+    // public static final String PAYMENT_URL = "http://localhost:8081";
+    // 集群环境要写对应的服务的 name
+    public static final String PAYMENT_URL = "http://CLOUD-PAYMENT-SERVICE";
     
     
     @Resource
