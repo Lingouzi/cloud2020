@@ -1,8 +1,12 @@
 package top.ybq87.springcloud.controller;
 
+import java.util.List;
 import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +34,14 @@ public class PaymentController {
     @Value("${server.port}")
     private String serverPort;
     
+    /**
+     ** 如果使用的是 netfix 的 import com.netflix.discovery.DiscoveryClient
+     * 使用 @Autowired 注解这里不能注入，使用 @Resource 才行
+     ** 这里使用 springcloud 的 DiscoveryClient 可以使用 Autowired 注解
+     */
+    @Autowired
+    private DiscoveryClient discoveryClient;
+    
     @PostMapping("/payment/create")
     public CommonResult<String> create(@RequestBody Payment payment) {
         int result = paymentService.create(payment);
@@ -49,4 +61,20 @@ public class PaymentController {
         }
         return CommonResult.failed("查询失败：" + id);
     }
+    
+    @GetMapping("/payment/discoveryClient")
+    public CommonResult discoveryClient() {
+        List<String> services = discoveryClient.getServices();
+        for (String service : services) {
+            System.out.println("service:" + service);
+        }
+        
+        List<ServiceInstance> instances = discoveryClient.getInstances("cloud-payment-service");
+        for (ServiceInstance instance : instances) {
+            System.out.println("instance>>> " + instance.toString());
+        }
+        
+        return CommonResult.success(discoveryClient);
+    }
+    
 }
