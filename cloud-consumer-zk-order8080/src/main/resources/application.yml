@@ -1,0 +1,9 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: cloud-payment-order
+  cloud:
+    zookeeper:
+      # zookeeper 注册中心
+      connect-string: 47.107.61.219:2181

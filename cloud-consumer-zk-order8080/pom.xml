@@ -9,8 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cloud-provider-payment8004</artifactId>
-
+    <artifactId>cloud-consumer-zk-order8080</artifactId>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
