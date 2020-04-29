@@ -14,9 +14,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-public class OrderZKMain8080 {
+public class PaymentZookeeperMain8084 {
     
     public static void main(String[] args) {
-        SpringApplication.run(OrderZKMain8080.class, args);
+        SpringApplication.run(PaymentZookeeperMain8084.class, args);
     }
 }

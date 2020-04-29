@@ -2,6 +2,7 @@ package top.ybq87.springcloud.controller;
 
 import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,4 +41,19 @@ public class OrderContrller {
     public CommonResult getPayment(@PathVariable("id") Long id) {
         return restTemplate.getForObject(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
     }
+    
+    @GetMapping("/consumer/payment/get2/{id}")
+    public CommonResult getForEntities(@PathVariable("id") Long id) {
+        ResponseEntity<CommonResult> entity = restTemplate
+                .getForEntity(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
+        return CommonResult.success(entity.getBody());
+    }
+    
+    @PostMapping("/consumer/payment/postForEntities")
+    public CommonResult postForEntities(Payment payment) {
+        ResponseEntity<CommonResult> entity = restTemplate
+                .postForEntity(PAYMENT_URL + "/payment/create", payment, CommonResult.class);
+        return CommonResult.success(entity.getBody());
+    }
+    
 }

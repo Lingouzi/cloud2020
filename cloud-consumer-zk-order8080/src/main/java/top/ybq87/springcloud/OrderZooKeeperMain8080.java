@@ -2,7 +2,7 @@ package top.ybq87.springcloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author ly
@@ -10,13 +10,13 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * @github https://github.com/Lingouzi
  * @email 664162337@qq.com
  * @wechat ly19870316 / 公众号：林子曰
- * @date 2020/4/25
+ * @date 2020/4/27
  */
 @SpringBootApplication
-@EnableEurekaClient
-public class OrderMain8080 {
+@EnableDiscoveryClient
+public class OrderZooKeeperMain8080 {
     
     public static void main(String[] args) {
-        SpringApplication.run(OrderMain8080.class);
+        SpringApplication.run(OrderZooKeeperMain8080.class, args);
     }
 }
