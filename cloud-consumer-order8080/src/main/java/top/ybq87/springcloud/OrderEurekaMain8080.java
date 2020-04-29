@@ -3,8 +3,6 @@ package top.ybq87.springcloud;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.netflix.ribbon.RibbonClient;
-import top.ybq87.myribbonrule.MyRibbonRule;
 
 /**
  * 通过 @RibbonClient 指定自定义配置ribbon 策略
@@ -18,7 +16,7 @@ import top.ybq87.myribbonrule.MyRibbonRule;
  */
 @SpringBootApplication
 @EnableEurekaClient
-@RibbonClient(name = "CLOUD-PAYMENT-SERVICE", configuration = MyRibbonRule.class)
+// @RibbonClient(name = "CLOUD-PAYMENT-SERVICE", configuration = MyRibbonRule.class)
 public class OrderEurekaMain8080 {
     
     public static void main(String[] args) {
