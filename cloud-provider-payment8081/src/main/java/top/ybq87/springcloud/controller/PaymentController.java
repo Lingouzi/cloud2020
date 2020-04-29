@@ -1,6 +1,7 @@
 package top.ybq87.springcloud.controller;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,21 @@ public class PaymentController {
         }
         
         return CommonResult.success(discoveryClient);
+    }
+    
+    /**
+     * 测试 feign 的超时时间，feign 默认超时是 1s
+     * @return
+     */
+    @GetMapping("/payment/timeoutFeign")
+    public CommonResult timeoutFeign() {
+        // 休眠几秒钟
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return CommonResult.success();
     }
     
 }

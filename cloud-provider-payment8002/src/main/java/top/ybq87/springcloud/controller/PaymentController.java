@@ -1,5 +1,6 @@
 package top.ybq87.springcloud.controller;
 
+import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,5 +49,16 @@ public class PaymentController {
             return CommonResult.success("查询：" + payment.toString() + ";serverPort" + serverPort);
         }
         return CommonResult.failed("查询失败：" + id);
+    }
+    
+    @GetMapping("/payment/timeoutFeign")
+    public CommonResult timeoutFeign() {
+        // 休眠几秒钟
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return CommonResult.success();
     }
 }

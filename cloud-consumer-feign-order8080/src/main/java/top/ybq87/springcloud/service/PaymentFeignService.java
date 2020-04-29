@@ -19,5 +19,8 @@ import top.ybq87.springcloud.common.CommonResult;
 public interface PaymentFeignService {
     
     @GetMapping("/payment/get/{id}")
-    public CommonResult<String> getPaymentById(@PathVariable("id") Long id);
+    CommonResult<String> getPaymentById(@PathVariable("id") Long id);
+    
+    @GetMapping("/payment/timeoutFeign")
+    CommonResult timeoutFeign();
 }
