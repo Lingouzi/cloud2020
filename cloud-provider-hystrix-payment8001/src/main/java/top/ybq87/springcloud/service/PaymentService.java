@@ -21,7 +21,20 @@ public class PaymentService {
     AtomicInteger atomicInteger = new AtomicInteger(0);
     
     public String payment_ok(String id) {
-        System.out.println("payment_ok.." + atomicInteger.incrementAndGet());
+        int x = atomicInteger.incrementAndGet();
+        if (x % 2 == 0) {
+            // 模拟超时
+            // 休眠几秒钟
+            try {
+                TimeUnit.SECONDS.sleep(3);
+                System.out.println("......payment_ok.." + x);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // 模拟异常
+            x = 10 / 0;
+        }
         return Thread.currentThread().getName() + " id:" + id + " ok..";
     }
     

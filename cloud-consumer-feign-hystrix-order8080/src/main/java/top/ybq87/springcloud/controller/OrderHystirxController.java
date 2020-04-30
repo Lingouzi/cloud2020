@@ -1,5 +1,6 @@
 package top.ybq87.springcloud.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import javax.annotation.Resource;
@@ -10,6 +11,7 @@ import top.ybq87.springcloud.common.CommonResult;
 import top.ybq87.springcloud.service.PaymentFeignService;
 
 /**
+ * 注解 @DefaultProperties，默认回退方法不能有参数，返回值要与 Hystrix 方法的返回值相同。
  * @author ly
  * @blog http://www.ybq87.top
  * @github https://github.com/Lingouzi
@@ -17,12 +19,14 @@ import top.ybq87.springcloud.service.PaymentFeignService;
  * @wechat ly19870316 / 公众号：林子曰
  * @date 2020/4/29
  */
+@DefaultProperties(defaultFallback = "defaultFallBack")
 @RestController
 public class OrderHystirxController {
     
     @Resource
     private PaymentFeignService paymentFeignService;
     
+    @HystrixCommand
     @GetMapping("/consumer/payment/hystrix/payment_ok/{id}")
     CommonResult payment_ok(@PathVariable("id") String id) {
         return paymentFeignService.payment_ok(id);
@@ -43,5 +47,9 @@ public class OrderHystirxController {
      */
     public CommonResult payment_timeoutHandler(String id) {
         return CommonResult.failed(Thread.currentThread().getName() + ">>> 消费者端 系统繁忙 >>>>" + " timeout :)");
+    }
+    
+    public CommonResult defaultFallBack() {
+        return CommonResult.failed("默认的 fallback");
     }
 }
