@@ -1,5 +1,7 @@
 package top.ybq87.springcloud.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,9 +28,20 @@ public class OrderHystirxController {
         return paymentFeignService.payment_ok(id);
     }
     
+    @HystrixCommand(fallbackMethod = "payment_timeoutHandler", commandProperties = {
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000")
+    })
     @GetMapping("/consumer/payment/hystrix/payment_timeout/{id}")
     CommonResult payment_timeout(@PathVariable("id") String id) {
         return paymentFeignService.payment_timeout(id);
     }
     
+    /**
+     * 超时或者异常的 fallback 方法
+     * @param id
+     * @return
+     */
+    public CommonResult payment_timeoutHandler(String id) {
+        return CommonResult.failed(Thread.currentThread().getName() + ">>> 消费者端 系统繁忙 >>>>" + " timeout :)");
+    }
 }

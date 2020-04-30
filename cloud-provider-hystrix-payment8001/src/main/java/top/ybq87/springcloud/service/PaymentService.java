@@ -57,7 +57,7 @@ public class PaymentService {
      * @return
      */
     public String payment_timeoutHandler(String id) {
-        return Thread.currentThread().getName() + ">>> 系统繁忙 >>>>" + " timeout :)";
+        return Thread.currentThread().getName() + ">>> 服务提供者 系统繁忙 >>>>" + " timeout :)";
     }
     
 }

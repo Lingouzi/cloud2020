@@ -2,6 +2,7 @@ package top.ybq87.springcloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @wechat ly19870316 / 公众号：林子曰
  * @date 2020/4/29
  */
+@EnableHystrix
 @EnableFeignClients
 @SpringBootApplication
 public class OrderHystrixMain8080 {
