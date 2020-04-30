@@ -38,4 +38,10 @@ public class PaymentHystrixController {
         return CommonResult.success(payment_timeout + " " + servicePort);
     }
     
+    //======== 熔断
+    
+    @GetMapping("/payment/hystrix/payment_ciccuitBreaker/{id}")
+    public CommonResult payment_ciccuitBreaker(@PathVariable("id") Integer id) {
+        return paymentService.payment_ciccuitBreaker(id);
+    }
 }

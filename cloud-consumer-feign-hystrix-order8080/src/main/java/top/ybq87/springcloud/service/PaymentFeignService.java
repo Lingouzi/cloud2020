@@ -15,7 +15,7 @@ import top.ybq87.springcloud.common.CommonResult;
  * @date 2020/4/29
  */
 @Component
-@FeignClient(value = "CLOUD-PAYMENT-HYSTRIX-SERVICE")
+@FeignClient(value = "CLOUD-PAYMENT-HYSTRIX-SERVICE", fallback = PaymenHystrixFeignService.class)
 public interface PaymentFeignService {
     
     @GetMapping("/payment/hystrix/payment_ok/{id}")
