@@ -4,6 +4,12 @@ server:
 spring:
   application:
     name: cloud-payment-service
+  zipkin:
+    base-url: http://47.107.61.219:9411/
+  sleuth:
+    sampler:
+      # 采样率 0~1，一般是 0.5，1 表示全部采集
+      probability: 1
   datasource:
     url: jdbc:mysql://localhost:3306/db2019?useSSL=false&useUnicode=true&characterEncoding=UTF8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root

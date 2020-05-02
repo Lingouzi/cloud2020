@@ -77,4 +77,10 @@ public class OrderContrller {
         return CommonResult.success(entity.getBody());
     }
     
+    
+    @GetMapping("/payment/sleuth")
+    public CommonResult paymentSleuth() {
+        ResponseEntity<CommonResult> entity = restTemplate.getForEntity(PAYMENT_URL + "/payment/sleuth", CommonResult.class);
+        return CommonResult.success(entity.getBody());
+    }
 }

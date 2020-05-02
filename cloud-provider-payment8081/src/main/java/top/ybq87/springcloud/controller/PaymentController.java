@@ -93,4 +93,9 @@ public class PaymentController {
         return CommonResult.success();
     }
     
+    @GetMapping("/payment/sleuth")
+    public CommonResult paymentSleuth() {
+        System.out.println(">>>>paymentSleuth...");
+        return CommonResult.success();
+    }
 }
