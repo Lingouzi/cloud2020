@@ -1,0 +1,43 @@
+server:
+  port: 8803
+spring:
+  application:
+    name: cloud-stream-rabbitmq-consumer
+  cloud:
+    stream:
+      binders: # 设置要绑定的 rabbitmq 的服务信息
+        defaultRabbit: # 自定义服务名称，给下面 binding 整合
+          type: rabbit # 消息组件类型
+          environment: # 环境配置
+            spring:
+              rabbitmq:
+                host: 47.107.61.219
+                port: 5672
+                username: user
+                password: JK4V4U6RDPXAHKU2
+      bindings: # 服务整合
+        input:
+          destination: myexchange
+          content-type: application/json
+          binder: defaultRabbit
+          group: g1
+
+
+eureka:
+  client:
+    # 将当前项目注册到注册中心，默认为 true
+    register-with-eureka: true
+    # 是否从 EurekaServer 抓取已有的注册信息，默认为 true，单点无所谓，集群必须为 true
+    fetch-registry: true
+    service-url:
+      #      defaultZone: http://localhost:7001/eureka
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+  instance:
+    # 主机名修改和 ip 地址展示
+    instance-id: stream-rabbitmq-receiver8803
+    prefer-ip-address: true
+## 去掉检查 rabbitmq 的 health 检查，否则在启动的时候会打印 Rabbit health check failed
+management:
+  health:
+    rabbit:
+      enabled: false
