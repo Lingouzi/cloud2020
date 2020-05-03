@@ -6,6 +6,7 @@ spring:
   cloud:
     nacos:
       discovery:
+        # 本机启动 nacos ：sh startup.sh -m standalone
         server-addr: 192.168.1.107:8848
 management:
   endpoints:

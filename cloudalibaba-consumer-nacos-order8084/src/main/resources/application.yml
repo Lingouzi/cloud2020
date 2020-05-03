@@ -1,5 +1,5 @@
 server:
-  port: 8085
+  port: 8084
 spring:
   application:
     name: nacos-consumer-service
@@ -7,11 +7,17 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.1.107:8848
+    # 哨兵
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:8080
+
 management:
   endpoints:
     web:
       exposure:
-        incloud: "*"
+        include: '*'
 
 ## 自定义的属性，
 service-url:
