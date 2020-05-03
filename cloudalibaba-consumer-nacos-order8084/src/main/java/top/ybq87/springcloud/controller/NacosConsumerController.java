@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import top.ybq87.springcloud.common.CommonResult;
+import top.ybq87.springcloud.service.PaymentFeignService;
 
 /**
  * @author ly
@@ -48,5 +49,13 @@ public class NacosConsumerController {
      */
     public CommonResult handler1(Integer id, Throwable e) {
         return CommonResult.failed("handler1:>>>>id:" + id + "," + e.getMessage());
+    }
+    
+    @Resource
+    private PaymentFeignService paymentFeignService;
+    
+    @GetMapping("/testFeign/{id}")
+    public CommonResult testFeign(@PathVariable("id") Integer id) {
+        return paymentFeignService.paymentInfo(id);
     }
 }

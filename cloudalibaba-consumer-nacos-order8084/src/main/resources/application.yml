@@ -12,7 +12,6 @@ spring:
       transport:
         port: 8719
         dashboard: localhost:8080
-
 management:
   endpoints:
     web:
@@ -22,3 +21,7 @@ management:
 ## 自定义的属性，
 service-url:
   nacos-payment-uri: http://nacos-provider-service
+# 打开 feign 对 sentinel 的支持。
+feign:
+  sentinel:
+    enabled: true
